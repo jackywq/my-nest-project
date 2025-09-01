@@ -79,7 +79,7 @@ npm run start:prod
 
 ### 响应示例
 ```json
-// /api/v1/users
+// /v1/api/users
 [
   {
     "name": "张三",
@@ -91,7 +91,7 @@ npm run start:prod
   }
 ]
 
-// /api/v1/status
+// /v1/api/status
 {
   "status": "运行中",
   "timestamp": "2024-01-01T12:00:00.000Z",

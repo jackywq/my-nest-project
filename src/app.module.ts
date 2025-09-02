@@ -4,8 +4,9 @@ import { AppController } from './app.controller'; // 应用程序控制器
 import { AppService } from './app.service'; // 应用程序服务
 import { ServeStaticModule } from '@nestjs/serve-static'; // 静态文件服务模块
 import { join } from 'path'; // Node.js 路径处理工具
-import { APP_INTERCEPTOR } from '@nestjs/core'; // 应用拦截器提供者
+import { APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core'; // 应用拦截器和过滤器提供者
 import { LoggingInterceptor } from './interceptors/logging.interceptor'; // 日志记录拦截器
+import { HttpExceptionFilter } from './filters/http-exception.filter.js'; // HTTP异常过滤器
 
 /**
  * AppModule - 应用程序根模块
@@ -30,6 +31,10 @@ import { LoggingInterceptor } from './interceptors/logging.interceptor'; // 日�
     {
       provide: APP_INTERCEPTOR, // 全局拦截器令牌
       useClass: LoggingInterceptor, // 使用日志记录拦截器
+    },
+    {
+      provide: APP_FILTER, // 全局过滤器令牌
+      useClass: HttpExceptionFilter, // 使用HTTP异常过滤器
     },
   ],
   // exports 数组用于导出模块中的提供者，使其可供其他模块使用
